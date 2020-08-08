@@ -1,8 +1,15 @@
+//обьевляем переменную
 let num = 266219;
+//используем регулярное выражение чтобы разбить целое число на массив
+console.log(num.toString().match(/.{1,1}/g));
+//Вывести в консоль произведение (умножение)
 
-num *= 1;
-console.log('n: ', num);
-num *= 2;
-console.log('n: ', num);
-num *= 3
-console.log('n: ', num);
+console.log(num.toString().split('').reduce((a, b) => a * b));
+//Полученный результат возвести в степень 3, используя только 1 оператор (Math.pow не подходит)
+let a = 1296;
+let b = 3;
+
+console.log(a ** b);
+// Вывести на экран первые 2 цифры полученного числа
+let number = 2176782336;
+console.log(String(number).slice(0, 2));
