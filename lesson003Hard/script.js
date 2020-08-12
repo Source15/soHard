@@ -27,9 +27,9 @@ var arr = {
 alert(arr[lang]);
 
 //задание 2
-let namePerson = 'Artem';
-console.log(namePerson > 'Maksim' ? 'директор' : 'преподаватель');
-console.log(namePerson < 'Maksim' ? 'директор' : 'преподаватель');
-console.log(namePerson > 'stydent' ? 'директор' : 'ученик');
-console.log(namePerson < 'stydent' ? 'директор' : 'ученик');
-///
+name = prompt('Как тебя зовут?');
+let namePerson = (name === 'Артем') ? 'Директор' :
+   (name == 'Максим') ? 'Предподователь' :
+   (name <= 'Cтудент') ? 'Учится' : 'хорошо';
+
+alert(namePerson);
