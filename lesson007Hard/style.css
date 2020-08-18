@@ -1,0 +1,23 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+body {
+   background-color: white;
+   font-family: Arial;
+   text-align: center;
+}
+
+.title {
+   margin-top: 100px;
+   color: blue;
+}
+
+.day-list {
+   margin-top: 50px;
+}
+
+.day {
+   font-size: 20px;
+}
