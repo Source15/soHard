@@ -1,23 +1,129 @@
 'use strict';
 
-let day = document.querySelectorAll('.day');
-let dayList = document.querySelector('.day-list');
+const dayFunc = function () {
+   let todayone = document.querySelector('.todayone'),
+      todaytwo = document.querySelector('.todaytwo'),
+      date = new Date(),
+      days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда',
+         'Четверг', 'Пятница', 'Суббота'
+      ],
+      months = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля',
+         'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
+      ],
+      year = date.getFullYear() + ' года';
 
-let date = new Date();
-let today = date.getDay();
 
-let week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+   const getDay = function () {
+      let day = date.getDay();
+      return days[day];
+   };
 
-let bustOfDay = function () {
-   day.forEach((item, index, arr) => {
-      item.textContent = week[index];
-      arr[0].style.fontStyle = 'italic';
-      arr[arr.length - 1].style.fontStyle = 'italic';
-      arr[today].style.fontWeight = '800';
-   });
+   const getToday = function () {
+      let month = date.getMonth();
+      return month + ' ' + months[7];
+   };
+
+   const getTimeLength = function (i) {
+      return parseInt(i.toString()[i.toString().length - 1]);
+   };
+
+   const getTime = function () {
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      let seconds = date.getSeconds();
+      let time = '';
+
+      switch (hours) {
+         case 1:
+         case 21:
+            time += `${hours} час `;
+            break;
+         case 2:
+         case 3:
+         case 4:
+         case 22:
+         case 23:
+            time += `${hours} часа `;
+            break;
+         default:
+            time += `${hours} часов `;
+            break;
+      }
+
+      if (minutes === 11 || minutes === 12 || minutes === 13 || minutes === 14) {
+         time += `${minutes} минут`;
+      } else {
+         switch (getTimeLength(minutes)) {
+            case 1:
+               time += `${minutes} минута`;
+               break;
+            case 2:
+            case 3:
+            case 4:
+               time += `${minutes} минуты`;
+               break;
+            case 0:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+               time += `${minutes} минут`;
+               break;
+         }
+      }
+
+      if (seconds === 11 || seconds === 12 || seconds === 13 || seconds === 14) {
+         time += ` ${seconds} секунд`;
+      } else {
+         switch (getTimeLength(seconds)) {
+            case 1:
+               time += ` ${seconds} секунда`;
+               break;
+            case 2:
+            case 3:
+            case 4:
+               time += ` ${seconds} секунды`;
+               break;
+            case 0:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+               time += ` ${seconds} секунд`;
+               break;
+         }
+      }
+      return time;
+   };
+
+   const formatDate = function (item) {
+      if (item.length === 1) {
+         item = '0' + item;
+      }
+      return item;
+   };
+
+   const getDateAndTime = function () {
+      let day = formatDate((date.getDay() + 16).toString());
+      let month = formatDate((date.getMonth() + 1).toString());
+      let year = formatDate(date.getFullYear().toString());
+      let hours = formatDate(date.getHours().toString());
+      let minutes = formatDate(date.getMinutes().toString());
+      let seconds = formatDate(date.getSeconds().toString());
+
+
+      todaytwo.innerHTML = `${formatDate(day)}.${formatDate(month)}.${formatDate(year)} 
+                    - ${formatDate(hours)}:${formatDate(minutes)}:${formatDate(seconds)}`;
+   };
+
+   //вызов функций
+   todayone.textContent = `${getDay()}, ${getToday()} 2020 года, ${getTime()}`;
+
+   getDateAndTime();
 };
 
-bustOfDay();
-//Метод getDay() возвращает порядковый номер дня недели указанной даты по местному времени, где 0 соответствует воскресенью.
-//Методы document.write и document.writeln пишут напрямую в текст документа, до того как браузер построит из него DOM, поэтому они могут записать в документ все, что угодно, любые стили и незакрытые теги.
-//Обратные кавычки же имеют «расширенную функциональность». Они позволяют нам встраивать выражения в строку, заключая их в ${…}
+setInterval(function () {
+   dayFunc();
+}, 1000);

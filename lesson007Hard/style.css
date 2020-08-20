@@ -14,10 +14,9 @@ body {
    color: blue;
 }
 
-.day-list {
-   margin-top: 50px;
-}
-
-.day {
-   font-size: 20px;
+.todayone,
+.todaytwo {
+   margin-top: 15px;
+   font-size: 15px;
+   color: tomato;
 }
